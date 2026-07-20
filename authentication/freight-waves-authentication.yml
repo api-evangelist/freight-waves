@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/freight-waves-sonar-openapi.yml
+docs: https://api.sonar.surf/Help/
+summary:
+  types:
+  - http
+  - oauth2
+  api_key_in: []
+  oauth2_flows:
+  - authorizationCode
+notes: >-
+  Two distinct auth surfaces. (1) The SONAR REST API uses an opaque/JWT bearer
+  token obtained from POST /Credential/authenticate (username + password), valid
+  one year, sent as `Authorization: Bearer <token>`. (2) The hosted MCP server at
+  api.freightwaves.com/mcp uses OAuth 2.1 (authorization_code + PKCE S256, dynamic
+  client registration, public client) with the mcp:read scope.
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    SONAR REST API bearer token from POST /Credential/authenticate, sent as
+    `Authorization: Bearer <token>`. Tokens are valid for one year; re-authenticating
+    issues a new token without invalidating prior tokens.
+  sources:
+  - openapi/freight-waves-sonar-openapi.yml
+  - https://api.sonar.surf/Help/
+- name: mcpOAuth
+  type: oauth2
+  description: OAuth 2.1 protection for the FreightWaves MCP server (scope mcp:read).
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.freightwaves.com/oauth/authorize
+    tokenUrl: https://api.freightwaves.com/oauth/token
+    registrationUrl: https://api.freightwaves.com/oauth/register
+    pkce: S256
+    scopes:
+      mcp:read: Read-only access to SONAR data via the MCP server.
+  sources:
+  - well-known/freight-waves-oauth-authorization-server.json
+  - well-known/freight-waves-oauth-protected-resource.json
