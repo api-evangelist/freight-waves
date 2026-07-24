@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: FreightWaves SONAR Authentication Data API
+  description: The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date. Access is via a bearer token obtained from the Credential authenticate endpoint. Data calls are billable; lookup calls (indexes, qualifiers, levels, lanes, zip3, latest) are free. This specification is a faithful capture of the publicly documented SONAR API reference; it is not published by FreightWaves as OpenAPI.
+  version: '2.0'
+  x-generated: '2026-07-19'
+  x-method: generated
+  x-source: https://api.sonar.surf/Help/
+  contact:
+    name: SONAR Support
+    url: https://knowledge.gosonar.com/
+servers:
+- url: https://api.freightwaves.com
+  description: SONAR API production
+security:
+- bearerAuth: []
+tags:
+- name: Data
+  description: Billable index data queries by item, level, and lane.
+paths:
+  /data/{index}/{qualifier}/{date}:
+    get:
+      operationId: getIndexData
+      tags:
+      - Data
+      summary: Get index data for a single date
+      description: Return the value of an index for a qualifier (market/lane/level) on a single date. Billable call.
+      parameters:
+      - name: index
+        in: path
+        required: true
+        schema:
+          type: string
+        example: OTRI
+        description: Index ticker (e.g. OTRI).
+      - name: qualifier
+        in: path
+        required: true
+        schema:
+          type: string
+        example: ATL
+        description: Qualifier — market
+        lane: null
+        or level code (e.g. ATL: null
+        NATIONAL: null
+        XMKT).: null
+      - name: date
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+        example: '2019-02-20'
+        description: Observation date (YYYY-MM-DD).
+      responses:
+        '200':
+          description: Index data points.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataPoint'
+        '401':
+          description: Missing or invalid bearer token.
+        '429':
+          description: Rate limit exceeded (100 requests/minute).
+  /data/{index}/{qualifier}/{startDate}/{endDate}:
+    get:
+      operationId: getIndexDataRange
+      tags:
+      - Data
+      summary: Get index data for a date range
+      description: Return index values for a qualifier across an inclusive date range. Billable call.
+      parameters:
+      - name: index
+        in: path
+        required: true
+        schema:
+          type: string
+        example: OTRI
+      - name: qualifier
+        in: path
+        required: true
+        schema:
+          type: string
+        example: ATL
+      - name: startDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+        example: '2019-02-01'
+      - name: endDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+        example: '2019-02-20'
+      responses:
+        '200':
+          description: Index data points for the range.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataPoint'
+        '401':
+          description: Missing or invalid bearer token.
+        '429':
+          description: Rate limit exceeded (100 requests/minute).
+components:
+  schemas:
+    DataPoint:
+      type: object
+      properties:
+        index:
+          type: string
+          example: OTRI
+        qualifier:
+          type: string
+          example: ATL
+        date:
+          type: string
+          format: date
+        value:
+          type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer token from POST /Credential/authenticate, sent as `Authorization: Bearer <token>`. Tokens are valid for one year.'

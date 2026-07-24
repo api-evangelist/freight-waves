@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: FreightWaves SONAR Authentication Lookup API
+  description: The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date. Access is via a bearer token obtained from the Credential authenticate endpoint. Data calls are billable; lookup calls (indexes, qualifiers, levels, lanes, zip3, latest) are free. This specification is a faithful capture of the publicly documented SONAR API reference; it is not published by FreightWaves as OpenAPI.
+  version: '2.0'
+  x-generated: '2026-07-19'
+  x-method: generated
+  x-source: https://api.sonar.surf/Help/
+  contact:
+    name: SONAR Support
+    url: https://knowledge.gosonar.com/
+servers:
+- url: https://api.freightwaves.com
+  description: SONAR API production
+security:
+- bearerAuth: []
+tags:
+- name: Lookup
+  description: Free reference lookups for valid indexes, qualifiers, levels, lanes, and zip3.
+paths:
+  /Lookup/Indexes:
+    get:
+      operationId: lookupIndexes
+      tags:
+      - Lookup
+      summary: List valid indexes (tickers)
+      description: Return the set of valid SONAR index tickers. Free call.
+      responses:
+        '200':
+          description: Valid indexes.
+        '401':
+          description: Missing or invalid bearer token.
+  /Lookup/Qualifiers:
+    get:
+      operationId: lookupQualifiers
+      tags:
+      - Lookup
+      summary: List valid qualifiers and tickers
+      description: Return valid qualifiers (markets/lanes) and their tickers. Free call.
+      responses:
+        '200':
+          description: Valid qualifiers.
+        '401':
+          description: Missing or invalid bearer token.
+  /Lookup/Levels:
+    get:
+      operationId: lookupLevels
+      tags:
+      - Lookup
+      summary: List valid qualifier levels
+      description: Return valid qualifier levels (e.g. NATIONAL, XMKT). Free call.
+      responses:
+        '200':
+          description: Valid levels.
+        '401':
+          description: Missing or invalid bearer token.
+  /Lookup/Lanes:
+    get:
+      operationId: lookupLanes
+      tags:
+      - Lookup
+      summary: List valid shipping lanes
+      description: Return valid shipping lanes. Free call.
+      responses:
+        '200':
+          description: Valid lanes.
+        '401':
+          description: Missing or invalid bearer token.
+  /Lookup/Zip3:
+    get:
+      operationId: lookupZip3
+      tags:
+      - Lookup
+      summary: List zip3 reference information
+      description: Return zip3 (3-digit ZIP) reference information. Free call.
+      responses:
+        '200':
+          description: Zip3 information.
+        '401':
+          description: Missing or invalid bearer token.
+  /Lookup/Latest:
+    get:
+      operationId: lookupLatestData
+      tags:
+      - Lookup
+      summary: Get the most recent data points
+      description: Return the most recent available data points. Free call.
+      responses:
+        '200':
+          description: Latest data points.
+        '401':
+          description: Missing or invalid bearer token.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer token from POST /Credential/authenticate, sent as `Authorization: Bearer <token>`. Tokens are valid for one year.'

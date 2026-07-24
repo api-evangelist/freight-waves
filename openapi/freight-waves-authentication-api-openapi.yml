@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: FreightWaves SONAR Authentication API
+  description: The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date. Access is via a bearer token obtained from the Credential authenticate endpoint. Data calls are billable; lookup calls (indexes, qualifiers, levels, lanes, zip3, latest) are free. This specification is a faithful capture of the publicly documented SONAR API reference; it is not published by FreightWaves as OpenAPI.
+  version: '2.0'
+  x-generated: '2026-07-19'
+  x-method: generated
+  x-source: https://api.sonar.surf/Help/
+  contact:
+    name: SONAR Support
+    url: https://knowledge.gosonar.com/
+servers:
+- url: https://api.freightwaves.com
+  description: SONAR API production
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+  description: Obtain and refresh API bearer tokens.
+paths:
+  /Credential/authenticate:
+    post:
+      operationId: authenticate
+      tags:
+      - Authentication
+      summary: Authenticate and retrieve an API bearer token
+      description: Exchange a SONAR username and password for a bearer token valid for one year. Re-authenticating issues a new token without invalidating previous tokens; SONAR recommends refreshing the token on a regular cadence.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          description: A bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+        '401':
+          description: Invalid username or password.
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Bearer token valid for one year.
+    Credentials:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer token from POST /Credential/authenticate, sent as `Authorization: Bearer <token>`. Tokens are valid for one year.'
