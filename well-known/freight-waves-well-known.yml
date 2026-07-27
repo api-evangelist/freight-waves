@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: probed /.well-known/ on api.freightwaves.com, api.sonar.surf and freightwaves.com
+hosts:
+  - host: https://api.freightwaves.com
+    documents:
+      - path: /.well-known/oauth-authorization-server   # RFC 8414
+        status: 200
+        file: freight-waves-oauth-authorization-server.json
+      - path: /.well-known/oauth-protected-resource      # RFC 9728 (MCP)
+        status: 200
+        file: freight-waves-oauth-protected-resource.json
+      - path: /.well-known/oauth-protected-resource/mcp   # RFC 9728, MCP resource
+        status: 200
+        file: freight-waves-oauth-protected-resource-mcp.json
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+  - host: https://api.sonar.surf
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: identical payload to api.freightwaves.com (issuer https://api.freightwaves.com)
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://freightwaves.com
+    documents:
+      - path: /llms.txt                                   # Yoast-generated
+        status: 200
+        file: ../llms/freight-waves-llms.txt
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+notes: >-
+  The OAuth authorization-server and protected-resource metadata advertise a
+  hosted MCP server at https://api.freightwaves.com/mcp (scope mcp:read, PKCE
+  S256, dynamic client registration). See mcp/freight-waves-mcp.yml.

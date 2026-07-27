@@ -1,0 +1,21 @@
+generated: '2026-07-19'
+method: searched
+source: well-known/freight-waves-oauth-authorization-server.json
+docs: https://api.freightwaves.com/.well-known/oauth-authorization-server
+notes: >-
+  Scopes here belong to the FreightWaves hosted MCP server's OAuth 2.1
+  authorization server (issuer https://api.freightwaves.com), not the SONAR REST
+  API (which uses opaque bearer tokens with no scope surface).
+schemes:
+- name: mcpOAuth
+  source: well-known/freight-waves-oauth-authorization-server.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.freightwaves.com/oauth/authorize
+    tokenUrl: https://api.freightwaves.com/oauth/token
+    codeChallengeMethods: [S256]
+scopes:
+- scope: mcp:read
+  description: Read-only access to SONAR freight-market data through the MCP server.
+  flows: [authorizationCode]
+  sources: [well-known/freight-waves-oauth-authorization-server.json]

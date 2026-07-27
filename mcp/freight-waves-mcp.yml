@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: >-
+  https://api.freightwaves.com/.well-known/oauth-protected-resource ; live
+  probe of POST https://api.freightwaves.com/mcp (HTTP 401 with
+  WWW-Authenticate: Bearer resource_metadata=".../.well-known/oauth-protected-resource/mcp")
+server:
+  name: freightwaves
+  description: >-
+    FreightWaves hosts a remote MCP server exposing SONAR freight-market
+    intelligence to agents. The endpoint is protected by OAuth 2.1 (bearer)
+    with the mcp:read scope; unauthenticated requests return 401 with an
+    RFC 9728 resource_metadata challenge.
+  transport: streamable-http
+  url: https://api.freightwaves.com/mcp
+  runtime: Kestrel (ASP.NET Core)
+authorization:
+  type: oauth2
+  protected_resource_metadata: https://api.freightwaves.com/.well-known/oauth-protected-resource/mcp
+  authorization_server: https://api.freightwaves.com
+  authorization_endpoint: https://api.freightwaves.com/oauth/authorize
+  token_endpoint: https://api.freightwaves.com/oauth/token
+  registration_endpoint: https://api.freightwaves.com/oauth/register   # dynamic client registration (RFC 7591)
+  grant_types_supported: [authorization_code, refresh_token]
+  code_challenge_methods_supported: [S256]
+  token_endpoint_auth_methods_supported: [none]
+  bearer_methods_supported: [header]
+  scopes_supported: [mcp:read]
+tools:
+  note: >-
+    The tool list is not enumerable without a valid OAuth token (the server
+    challenges before initialize). The mcp:read scope indicates read-only
+    tools over SONAR data; capture the concrete tool set on a future
+    authenticated pass.
+verification:
+  probed: '2026-07-19'
+  initialize_status: 401
+  www_authenticate: >-
+    Bearer resource_metadata="http://api.freightwaves.com/.well-known/oauth-protected-resource/mcp"

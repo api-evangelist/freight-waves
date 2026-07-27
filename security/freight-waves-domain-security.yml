@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: freightwaves.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 25 08:44:54 2026 GMT
+  hsts: false
+- host: api.sonar.surf
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  5 09:55:36 2026 GMT
+  hsts: false
+- host: api.freightwaves.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 22 23:18:18 2026 GMT
+  hsts: false
+domains:
+- domain: freightwaves.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: sonar.surf
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

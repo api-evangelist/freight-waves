@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://api.sonar.surf/Help/
+versioning:
+  scheme: uri-host
+  current: v2
+  docs: https://api.sonar.surf/Help/
+  note: Base host api.freightwaves.com; SONAR Help references a v2-era API surface.
+token_lifecycle:
+  bearer_token_ttl: 1 year
+  refresh: re-authenticate via POST /Credential/authenticate
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or RFC 8594 Sunset/Deprecation header support documented.
+sla:
+  url: null
+  note: No public SLA / uptime target documented.
+status_page:
+  url: null
+  note: No public status page located.
+deprecated_operations: []
+release_notes: https://knowledge.gosonar.com/

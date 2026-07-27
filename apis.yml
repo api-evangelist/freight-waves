@@ -1,20 +1,93 @@
 aid: freight-waves
 name: Freight Waves
-description: Freight Waves is a company surfaced as a portfolio company of 8vc and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  FreightWaves is a supply-chain, logistics, and transportation news and market-
+  intelligence company based in Chattanooga, TN, and backed by 8vc. Its SONAR
+  platform delivers freight-market data — rate indexes, tender volumes and
+  rejection indexes, capacity and pricing signals — by market, lane, and national
+  geography over a REST API at api.freightwaves.com. Access uses a bearer token
+  obtained from the Credential authenticate endpoint (valid one year); data calls
+  are billable while lookup calls (indexes, qualifiers, levels, lanes, zip3,
+  latest) are free, and a global 100 requests/minute rate limit applies.
+  FreightWaves also operates a hosted, OAuth-protected MCP server
+  (api.freightwaves.com/mcp, scope mcp:read) exposing SONAR data to agents.
 url: https://raw.githubusercontent.com/api-evangelist/freight-waves/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.freightwaves.com/wp-content/uploads/2020/01/FreightWaves-1.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - 8vc
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Freight
+- Logistics
+- Supply Chain
+- Transportation
+- Trucking
+- Market Data
+- Analytics
+- Freight Rates
+- SONAR
+apis:
+- aid: freight-waves:freight-waves-authentication-api
+  name: Freight Waves Authentication API
+  description: Obtain and refresh API bearer tokens.
+  humanURL: https://api.sonar.surf/Help/
+  baseURL: https://api.freightwaves.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/freight-waves-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://knowledge.gosonar.com/
+  - type: APIReference
+    url: https://api.sonar.surf/Help/
+- aid: freight-waves:freight-waves-data-api
+  name: Freight Waves Data API
+  description: Billable index data queries by item, level, and lane.
+  humanURL: https://api.sonar.surf/Help/
+  baseURL: https://api.freightwaves.com
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/freight-waves-data-api-openapi.yml
+  - type: Documentation
+    url: https://knowledge.gosonar.com/
+  - type: APIReference
+    url: https://api.sonar.surf/Help/
+- aid: freight-waves:freight-waves-lookup-api
+  name: Freight Waves Lookup API
+  description: Free reference lookups for valid indexes, qualifiers, levels, lanes, and zip3.
+  humanURL: https://api.sonar.surf/Help/
+  baseURL: https://api.freightwaves.com
+  tags:
+  - Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/freight-waves-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://knowledge.gosonar.com/
+  - type: APIReference
+    url: https://api.sonar.surf/Help/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +96,64 @@ maintainers:
 common:
 - type: Website
   url: https://freightwaves.com
+- type: DeveloperPortal
+  url: https://knowledge.gosonar.com/
+- type: Documentation
+  url: https://knowledge.gosonar.com/
+- type: APIReference
+  url: https://api.sonar.surf/Help/
+- type: GettingStarted
+  url: https://knowledge.gosonar.com/
+- type: Support
+  url: https://www.freightwaves.com/contact
+- type: Blog
+  url: https://www.freightwaves.com/news
+- type: GitHubOrganization
+  url: https://github.com/FreightWaves
+- type: Login
+  url: https://sonar.surf/auth/login
+- type: SignUp
+  url: https://gosonar.com/sonar-demo-request
+- type: Pricing
+  url: https://www.freightwaves.com/subscribe
+- type: TermsOfService
+  url: https://www.freightwaves.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://firecrown.com/privacy-policy/
+- type: OpenAPI
+  url: openapi/freight-waves-sonar-openapi.yml
+- type: Overlay
+  url: overlays/freight-waves-sonar-overlay.yaml
+- type: MCPServer
+  url: mcp/freight-waves-mcp.yml
+- type: WellKnown
+  url: well-known/freight-waves-well-known.yml
+- type: LLMsTxt
+  url: llms/freight-waves-llms.txt
+- type: Authentication
+  url: authentication/freight-waves-authentication.yml
+- type: OAuthScopes
+  url: scopes/freight-waves-scopes.yml
+- type: Conventions
+  url: conventions/freight-waves-conventions.yml
+- type: RateLimits
+  url: rate-limits/freight-waves-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/freight-waves-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/freight-waves-lifecycle.yml
+- type: Conformance
+  url: conformance/freight-waves-conformance.yml
+- type: DomainSecurity
+  url: security/freight-waves-domain-security.yml
+- type: DataModel
+  url: data-model/freight-waves-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/freight-waves-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

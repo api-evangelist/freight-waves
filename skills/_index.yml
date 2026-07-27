@@ -1,0 +1,7 @@
+generated: '2026-07-19'
+method: generated
+skills:
+- file: freight-waves-fetch-index-data.md
+  name: Fetch SONAR freight-market index data
+  api: openapi/freight-waves-sonar-openapi.yml
+  operations: [authenticate, lookupIndexes, lookupQualifiers, getIndexData, getIndexDataRange]

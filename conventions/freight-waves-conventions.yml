@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: https://api.sonar.surf/Help/
+authentication:
+  style: bearer-token
+  obtain: POST /Credential/authenticate (username + password)
+  header: 'Authorization: Bearer <token>'
+  token_lifetime: 1 year
+  refresh: re-authenticate (does not invalidate prior tokens)
+  ref: authentication/freight-waves-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key contract is documented. The billable operations are all
+    HTTP GET (naturally idempotent reads); there are no documented unsafe write
+    operations requiring an idempotency key.
+pagination:
+  style: none-documented
+  note: >-
+    Data is addressed directly by index/qualifier/date (single date or date
+    range) rather than paged. Record volume is bounded by account limits.
+versioning:
+  scheme: uri-host
+  note: >-
+    The documented base host is api.freightwaves.com; the SONAR API Help
+    surfaces a v2-era reference. No version path segment is documented.
+request_tracing:
+  request_id_header: none-documented
+error_envelope:
+  documented_status_codes: [401, 429]
+  format: none-documented (no application/problem+json evidence)
+  ref: errors/freight-waves-problem-types.yml
+rate_limiting:
+  global: 100 requests/minute
+  exceeded_status: 429
+  blacklist: ~10 minutes on continued over-limit requests
+  ref: rate-limits/freight-waves-rate-limits.yml
+date_semantics:
+  format: YYYY-MM-DD
+  single_and_range: /data/{index}/{qualifier}/{date} and /{date}/{date}
+billing:
+  billable: data calls
+  free: lookup calls (Indexes, Qualifiers, Levels, Lanes, Zip3, Latest)

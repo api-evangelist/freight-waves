@@ -1,0 +1,38 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/freight-waves-sonar-openapi.yml
+note: >-
+  Entity graph derived from the SONAR API path structure (/data/{index}/{qualifier}/{date}).
+  A DataPoint is addressed by an Index, a Qualifier (a market, lane, or level), and a date.
+entities:
+- name: Index
+  description: A SONAR data series ticker (e.g. OTRI — Outbound Tender Reject Index).
+  id_field: index
+  lookup: /Lookup/Indexes
+- name: Qualifier
+  description: A geography or grouping for an index value — a market, lane, or level.
+  id_field: qualifier
+  lookup: /Lookup/Qualifiers
+  variants:
+  - Level  # e.g. NATIONAL, XMKT — /Lookup/Levels
+  - Lane   # origin-destination lane — /Lookup/Lanes
+- name: Zip3
+  description: 3-digit ZIP reference used to resolve geographies.
+  lookup: /Lookup/Zip3
+- name: DataPoint
+  description: An index value for a given qualifier on a given date.
+  fields: [index, qualifier, date, value]
+relationships:
+- from: DataPoint
+  to: Index
+  kind: belongs_to
+  via: index
+- from: DataPoint
+  to: Qualifier
+  kind: belongs_to
+  via: qualifier
+- from: Qualifier
+  to: Zip3
+  kind: has_many
+  via: zip3
+  note: lane/market qualifiers resolve to zip3 geographies

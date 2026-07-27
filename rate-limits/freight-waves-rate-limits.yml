@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: searched
+source: https://api.sonar.surf/Help/
+scope: global
+limits:
+- name: Global request rate
+  limit_count: 100
+  window: 1m
+  applies_to: all endpoints (individual endpoint limits may be lower)
+  enforcement: >-
+    Exceeding the limit returns HTTP 429. Continued requests after the limit
+    result in a temporary blacklist of roughly 10 minutes.
+  status_code: 429
+notes: >-
+  Record/volume limits on data returned are negotiable with the SONAR customer
+  success team. SONAR recommends refreshing the bearer token on a regular
+  cadence. No RateLimit-* response headers are documented.

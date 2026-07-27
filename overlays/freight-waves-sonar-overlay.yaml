@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FreightWaves SONAR API
+  version: 1.0.0
+extends: openapi/freight-waves-sonar-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-19'
+    x-apievangelist-source: https://api.sonar.surf/Help/
+    x-billing-model: data calls billable; lookup calls free
+- target: $.info
+  update:
+    x-rate-limit:
+      global: 100/minute
+      exceeded_status: 429
+      blacklist: ~10 minutes
+- target: $.components.securitySchemes
+  update:
+    mcpOAuth:
+      type: oauth2
+      description: OAuth 2.1 for the FreightWaves hosted MCP server (scope mcp:read).
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.freightwaves.com/oauth/authorize
+          tokenUrl: https://api.freightwaves.com/oauth/token
+          scopes:
+            mcp:read: Read-only access to SONAR data via MCP.

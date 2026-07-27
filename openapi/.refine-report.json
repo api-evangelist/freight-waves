@@ -1,0 +1,18 @@
+{
+  "provider": "freight-waves",
+  "sources": [
+    "freight-waves-authentication-api-openapi.yml",
+    "freight-waves-data-api-openapi.yml",
+    "freight-waves-lookup-api-openapi.yml"
+  ],
+  "outputs": [
+    "freight-waves-authentication-api-openapi.yml",
+    "freight-waves-data-api-openapi.yml",
+    "freight-waves-lookup-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

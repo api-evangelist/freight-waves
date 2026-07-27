@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/freight-waves-sonar-openapi.yml
+format: http-status
+docs: https://api.sonar.surf/Help/
+note: >-
+  SONAR does not document an RFC 9457 problem+json envelope; errors are conveyed
+  via HTTP status codes. Derived from documented status codes plus the live MCP
+  auth challenge.
+problems:
+- status: 401
+  title: Unauthorized
+  meaning: >-
+    Missing, invalid, or expired bearer token on the SONAR REST API, or an
+    unauthenticated request to the MCP server (which returns 401 with an RFC 9728
+    resource_metadata challenge).
+  remediation: Re-authenticate via POST /Credential/authenticate; for MCP, complete the OAuth flow.
+  source_operation: openapi/freight-waves-sonar-openapi.yml#getIndexData
+- status: 429
+  title: Too Many Requests
+  meaning: Rate limit exceeded (global 100 requests/minute). Continued over-limit requests trigger a ~10 minute blacklist.
+  remediation: Back off and retry after the window; contact customer success to raise limits.
+  source_operation: openapi/freight-waves-sonar-openapi.yml#getIndexData
