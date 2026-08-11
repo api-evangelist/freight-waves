@@ -121,7 +121,7 @@ common:
 - type: PrivacyPolicy
   url: https://firecrown.com/privacy-policy/
 - type: OpenAPI
-  url: openapi/freight-waves-sonar-openapi.yml
+  url: openapi/_original/freight-waves-sonar-openapi.yml
 - type: Overlay
   url: overlays/freight-waves-sonar-overlay.yaml
 - type: MCPServer
