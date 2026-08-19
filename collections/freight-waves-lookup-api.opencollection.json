@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FreightWaves SONAR Authentication Lookup API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List valid indexes (tickers)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/Lookup/Indexes"
+          },
+          "docs": "Return the set of valid SONAR index tickers. Free call."
+        },
+        {
+          "info": {
+            "name": "List valid qualifiers and tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/Lookup/Qualifiers"
+          },
+          "docs": "Return valid qualifiers (markets/lanes) and their tickers. Free call."
+        },
+        {
+          "info": {
+            "name": "List valid qualifier levels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/Lookup/Levels"
+          },
+          "docs": "Return valid qualifier levels (e.g. NATIONAL, XMKT). Free call."
+        },
+        {
+          "info": {
+            "name": "List valid shipping lanes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/Lookup/Lanes"
+          },
+          "docs": "Return valid shipping lanes. Free call."
+        },
+        {
+          "info": {
+            "name": "List zip3 reference information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/Lookup/Zip3"
+          },
+          "docs": "Return zip3 (3-digit ZIP) reference information. Free call."
+        },
+        {
+          "info": {
+            "name": "Get the most recent data points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/Lookup/Latest"
+          },
+          "docs": "Return the most recent available data points. Free call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

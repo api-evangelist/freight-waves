@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FreightWaves SONAR Authentication Data API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get index data for a single date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/data/:index/:qualifier/:date",
+            "params": [
+              {
+                "name": "index",
+                "value": "OTRI",
+                "type": "path",
+                "description": "Index ticker (e.g. OTRI)."
+              },
+              {
+                "name": "qualifier",
+                "value": "ATL",
+                "type": "path",
+                "description": "Qualifier — market"
+              },
+              {
+                "name": "date",
+                "value": "2019-02-20",
+                "type": "path",
+                "description": "Observation date (YYYY-MM-DD)."
+              }
+            ]
+          },
+          "docs": "Return the value of an index for a qualifier (market/lane/level) on a single date. Billable call."
+        },
+        {
+          "info": {
+            "name": "Get index data for a date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freightwaves.com/data/:index/:qualifier/:startDate/:endDate",
+            "params": [
+              {
+                "name": "index",
+                "value": "OTRI",
+                "type": "path"
+              },
+              {
+                "name": "qualifier",
+                "value": "ATL",
+                "type": "path"
+              },
+              {
+                "name": "startDate",
+                "value": "2019-02-01",
+                "type": "path"
+              },
+              {
+                "name": "endDate",
+                "value": "2019-02-20",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Return index values for a qualifier across an inclusive date range. Billable call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

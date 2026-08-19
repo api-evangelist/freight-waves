@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "5d24e5cd-2211-4321-a758-3e2a5642dfe9",
+      "name": "Authentication",
+      "description": {
+        "content": "Obtain and refresh API bearer tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "673b5e68-7258-43c5-930a-adf6161edb4c",
+          "name": "Authenticate and retrieve an API bearer token",
+          "request": {
+            "name": "Authenticate and retrieve an API bearer token",
+            "description": {
+              "content": "Exchange a SONAR username and password for a bearer token valid for one year. Re-authenticating issues a new token without invalidating previous tokens; SONAR recommends refreshing the token on a regular cadence.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Credential",
+                "authenticate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3fdd2e0-aac7-4221-afef-1fd258214e7d",
+              "name": "A bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Credential",
+                    "authenticate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec213b2d-00ba-4734-ae6e-ed7c08d0e4ce",
+              "name": "Invalid username or password.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Credential",
+                    "authenticate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.freightwaves.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "82df070b-d48d-4e79-b0c6-d86b871cee38",
+    "name": "FreightWaves SONAR Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date. Access is via a bearer token obtained from the Credential authenticate endpoint. Data calls are billable; lookup calls (indexes, qualifiers, levels, lanes, zip3, latest) are free. This specification is a faithful capture of the publicly documented SONAR API reference; it is not published by FreightWaves as OpenAPI.\n\nContact Support:\n Name: SONAR Support",
+      "type": "text/plain"
+    }
+  }
+}
