@@ -44,6 +44,17 @@ tags:
 - Market Data
 - Analytics
 - Freight Rates
+- Sonar
+tags_raw:
+- Company
+- Freight
+- Logistics
+- Supply Chain
+- Transportation
+- Trucking
+- Market Data
+- Analytics
+- Freight Rates
 - SONAR
 apis:
 - aid: freight-waves:freight-waves-authentication-api
