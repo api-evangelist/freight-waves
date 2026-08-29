@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: FreightWaves SONAR Authentication Lookup API
   description: The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date. Access is via a bearer token obtained from the Credential authenticate endpoint. Data calls are billable; lookup calls (indexes, qualifiers, levels, lanes, zip3, latest) are free. This specification is a faithful capture of the publicly documented SONAR API reference; it is not published by FreightWaves as OpenAPI.
