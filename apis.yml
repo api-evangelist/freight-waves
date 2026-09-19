@@ -143,8 +143,6 @@ common:
   url: https://www.freightwaves.com/terms-of-use
 - type: PrivacyPolicy
   url: https://firecrown.com/privacy-policy/
-- type: OpenAPI
-  url: openapi/_original/freight-waves-sonar-openapi.yml
 - type: Overlay
   url: overlays/freight-waves-sonar-overlay.yaml
 - type: MCPServer
