@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: FreightWaves SONAR Authentication API
-  description: The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date. Access is via a bearer token obtained from the Credential authenticate endpoint. Data calls are billable; lookup calls (indexes, qualifiers, levels, lanes, zip3, latest) are free. This specification is a faithful capture of the publicly documented SONAR API reference; it is not published by FreightWaves as OpenAPI.
+  description: The FreightWaves SONAR API delivers freight-market intelligence — index values (rates, volumes, tender rejections, capacity signals, etc.) by geography (market, lane, national) and date.
   version: '2.0'
   x-generated: '2026-07-19'
   x-method: generated
@@ -43,12 +43,6 @@ paths:
           description: Invalid username or password.
 components:
   schemas:
-    AuthToken:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Bearer token valid for one year.
     Credentials:
       type: object
       required:
@@ -60,6 +54,12 @@ components:
         password:
           type: string
           format: password
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Bearer token valid for one year.
   securitySchemes:
     bearerAuth:
       type: http
