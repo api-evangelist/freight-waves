@@ -43,6 +43,12 @@ paths:
           description: Invalid username or password.
 components:
   schemas:
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Bearer token valid for one year.
     Credentials:
       type: object
       required:
@@ -54,12 +60,6 @@ components:
         password:
           type: string
           format: password
-    AuthToken:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Bearer token valid for one year.
   securitySchemes:
     bearerAuth:
       type: http
